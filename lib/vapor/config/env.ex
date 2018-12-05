@@ -41,9 +41,11 @@ defmodule Vapor.Config.Env do
     }
   end
 
+  @spec build_prefix(String.t()) :: String.t()
   defp build_prefix(prefix), do: "#{prefix}_"
 
   defimpl Vapor.Provider do
+    @spec load(map) :: {:error, String.t()} | {:ok, %{}}
     def load(%{prefix: :none, bindings: bindings}) do
       envs = System.get_env()
 
@@ -75,12 +77,14 @@ defmodule Vapor.Config.Env do
       {:ok, prefixed_envs}
     end
 
+    @spec normalize(String.t(), String.t()) :: String.t()
     defp normalize(str, prefix) do
       str
       |> String.replace_leading(prefix, "")
       |> String.downcase()
     end
 
+    @spec matches_prefix?(tuple, String.t()) :: boolean()
     defp matches_prefix?({k, _v}, prefix) do
       String.starts_with?(k, prefix)
     end

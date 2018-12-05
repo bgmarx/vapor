@@ -15,7 +15,8 @@ defmodule Vapor.Mixfile do
       preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.html": :test],
       dialyzer: [
         ignore_warnings: "dialyzer.ignore-warnings",
-        plt_file: {:no_warn, "priv/plts/vapor.plt"}
+        plt_file: {:no_warn, "priv/plts/vapor.plt"},
+        plt_add_deps: :apps_direct
       ],
       test_coverage: [tool: ExCoveralls]
     ]
